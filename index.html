@@ -883,6 +883,142 @@
         color: var(--coral-deep);
       }
 
+      .mood-section {
+        padding-block: 34px 72px;
+      }
+      .mood-heading {
+        margin-bottom: 22px;
+      }
+      .mood-heading .eyebrow {
+        margin-bottom: 8px;
+        color: var(--coral-deep);
+      }
+      .mood-heading h2 {
+        margin: 0;
+        font-family: var(--serif);
+        font-size: clamp(28px, 4vw, 40px);
+        font-weight: 500;
+      }
+      .mood-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        border: 1px solid var(--line);
+        background: var(--white);
+      }
+      .mood-song,
+      .mood-message {
+        min-width: 0;
+        padding: 28px;
+      }
+      .mood-song {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        background: #e7eadf;
+      }
+      .mood-song-label,
+      .mood-message-label {
+        margin: 0 0 12px;
+        color: var(--coral-deep);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .mood-song h3 {
+        margin: 0 0 18px;
+        font-family: var(--serif);
+        font-size: 25px;
+        font-weight: 500;
+      }
+      .mood-song-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        padding: 11px 15px;
+        background: var(--coral-deep);
+        color: white;
+        font-size: 12px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .mood-song-link:hover {
+        background: var(--ink);
+      }
+      .mood-message {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .mood-message p:last-of-type {
+        margin: 0;
+        color: var(--ink);
+        font-family: var(--serif);
+        font-size: 19px;
+        line-height: 1.65;
+        white-space: pre-wrap;
+      }
+      .mood-edit-toggle {
+        align-self: flex-start;
+        margin-top: 20px;
+        padding: 8px 0;
+        border: 0;
+        background: transparent;
+        color: var(--coral-deep);
+        font-size: 12px;
+        font-weight: 700;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        cursor: pointer;
+      }
+      .mood-edit-form {
+        display: grid;
+        gap: 12px;
+        margin-top: 14px;
+      }
+      .mood-edit-form[hidden] {
+        display: none;
+      }
+      .mood-edit-form label {
+        display: grid;
+        gap: 6px;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .mood-edit-form input,
+      .mood-edit-form textarea {
+        width: 100%;
+        padding: 10px 11px;
+        border: 1px solid var(--line);
+        border-radius: 2px;
+        background: #fff;
+        color: var(--ink);
+        font: 13px var(--sans);
+      }
+      .mood-edit-form textarea {
+        min-height: 88px;
+        resize: vertical;
+        line-height: 1.5;
+      }
+      .mood-edit-form button {
+        justify-self: start;
+        padding: 10px 15px;
+        border: 0;
+        background: var(--ink);
+        color: white;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .mood-edit-status {
+        min-height: 16px;
+        margin: 0;
+        color: var(--coral-deep);
+        font-size: 11px;
+      }
+
       .surprises {
         padding-block: 72px 86px;
         border-top: 1px solid var(--line);
@@ -1157,9 +1293,10 @@
       }
       .letter-image {
         min-height: 390px;
-        background: #617260
-          url("https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?auto=format&fit=crop&w=1200&q=85")
-          center 44% / cover;
+        background-color: #617260;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
       }
       .letter-copy {
         display: flex;
@@ -1419,6 +1556,16 @@
         }
         .soundtrack {
           padding-block: 8px 60px;
+        }
+        .mood-section {
+          padding-block: 24px 56px;
+        }
+        .mood-layout {
+          grid-template-columns: 1fr;
+        }
+        .mood-song,
+        .mood-message {
+          padding: 23px;
         }
         .music-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2048,12 +2195,8 @@
             <div
               class="letter-image"
               role="img"
-              aria-label="A panda relaxing in a leafy green garden"
-              style="
-                background-image: url(&quot;static/Baby_Panda.jpeg&quot;);
-                background-size: cover;
-                background-position: center;
-              "
+              id="mood-image"
+              aria-label="A panda image for this user's mood"
             ></div>
             <div class="letter-copy">
               <p class="eyebrow">A note, from my heart</p>
@@ -2101,6 +2244,65 @@
           <span class="finale-stamp" aria-hidden="true"
             >VERDICT<br />IN: LOVE</span
           >
+        </section>
+
+        <section class="shell mood-section" aria-labelledby="mood-title">
+          <div class="mood-heading">
+            <p class="eyebrow">Sharing A little corner feeling</p>
+            <h2 id="mood-title">My Mood (New Update🤗)</h2>
+          </div>
+          <div class="mood-layout">
+            <div class="mood-song">
+              <p class="mood-song-label">A song for this mood 🎧</p>
+              <h3 id="mood-song-title">Just Listen 🎧</h3>
+              <a
+                class="mood-song-link"
+                id="mood-song-link"
+                href="https://youtu.be/HyLCgkQtluw?si=w7WPmkPgBj0ZMq2b"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span aria-hidden="true">▶</span> Play the song
+              </a>
+            </div>
+            <div class="mood-message">
+              <p class="mood-message-label">A message for you 💌</p>
+              <p id="mood-message-text"></p>
+              <button
+                class="mood-edit-toggle"
+                id="mood-edit-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="mood-edit-form"
+              >
+                Change song and message
+              </button>
+              <form class="mood-edit-form" id="mood-edit-form" hidden>
+                <label for="mood-song-url">Song link</label>
+                <input
+                  id="mood-song-url"
+                  name="song-url"
+                  type="url"
+                  inputmode="url"
+                  placeholder="https://youtu.be/HyLCgkQtluw?si=w7WPmkPgBj0ZMq2b"
+                  required
+                />
+                <label for="mood-message-input">Message</label>
+                <textarea
+                  id="mood-message-input"
+                  name="message"
+                  maxlength="500"
+                  required
+                ></textarea>
+                <button type="submit">Save changes</button>
+                <p
+                  class="mood-edit-status"
+                  id="mood-edit-status"
+                  role="status"
+                ></p>
+              </form>
+            </div>
+          </div>
         </section>
 
         <section class="shell soundtrack" aria-labelledby="soundtrack-title">
@@ -2247,14 +2449,24 @@
       const passwordInput = document.getElementById("password-input");
       const unlockButton = document.getElementById("unlock-button");
       const passwordError = document.getElementById("password-error");
-      const correctPassword = "130801";
+      const passwordProfiles = {
+        "130801": 1,
+        Cutiee: 2,
+      };
+      let activeMoodId = null;
 
       function unlockPage() {
         const value = passwordInput.value.trim();
+        const moodId = passwordProfiles[value];
 
-        if (value === correctPassword) {
+        if (moodId) {
+          activeMoodId = moodId;
           document.body.classList.add("unlocked");
           passwordError.textContent = "";
+          loadSharedMood().catch(() => {
+            moodEditStatus.textContent =
+              "Could not load this user's shared mood. Check the database setup.";
+          });
           return;
         }
 
@@ -2309,6 +2521,122 @@
         clearTimeout(toastTimer);
         toastTimer = setTimeout(() => toast.classList.remove("visible"), 2200);
       }
+
+      const supabaseUrl = "https://muvdnlmppoyiqfhpthgr.supabase.co";
+      const supabasePublishableKey =
+        "sb_publishable_Y6Sk1M__6Fi20yuRF1RYIQ_wISRfvAx";
+      function getMoodEndpoint() {
+        return `${supabaseUrl}/rest/v1/mood?id=eq.${activeMoodId}&select=id,song_url,message,image_path`;
+      }
+
+      const defaultMood = {
+        songUrl: "https://youtu.be/LV_wiOhO40Q?si=_qoRFKGbHob5LnL3",
+        message:
+          "Whatever mood finds you today, I hope this song reminds you that you are loved, missed, and always close to my heart. 🐼💕",
+      };
+      const moodSongLink = document.getElementById("mood-song-link");
+      const moodMessageText = document.getElementById("mood-message-text");
+      const moodEditToggle = document.getElementById("mood-edit-toggle");
+      const moodEditForm = document.getElementById("mood-edit-form");
+      const moodSongUrlInput = document.getElementById("mood-song-url");
+      const moodMessageInput = document.getElementById("mood-message-input");
+      const moodEditStatus = document.getElementById("mood-edit-status");
+      const moodImage = document.getElementById("mood-image");
+
+      function applyMood(mood) {
+        moodSongLink.href = mood.songUrl;
+        moodMessageText.textContent = mood.message;
+        moodSongUrlInput.value = mood.songUrl;
+        moodMessageInput.value = mood.message;
+        if (mood.imagePath) {
+          const encodedPath = mood.imagePath
+            .split("/")
+            .map(encodeURIComponent)
+            .join("/");
+          moodImage.style.backgroundImage = `url("${supabaseUrl}/storage/v1/object/public/mood-images/${encodedPath}")`;
+        } else {
+          moodImage.style.backgroundImage = "none";
+        }
+      }
+
+      function moodFromRow(row) {
+        return {
+          songUrl: row.song_url,
+          message: row.message,
+          imagePath: row.image_path,
+        };
+      }
+
+      async function loadSharedMood() {
+        if (activeMoodId === null) return;
+        const response = await fetch(getMoodEndpoint(), {
+          headers: { apikey: supabasePublishableKey },
+        });
+        if (!response.ok) throw new Error("Could not load shared mood.");
+        const rows = await response.json();
+        if (!rows[0]) throw new Error("No mood row exists for this user.");
+        applyMood(moodFromRow(rows[0]));
+      }
+
+      applyMood(defaultMood);
+
+      window.setInterval(() => {
+        if (activeMoodId !== null && moodEditForm.hidden) {
+          loadSharedMood().catch(() => {});
+        }
+      }, 5000);
+
+      moodEditToggle.addEventListener("click", () => {
+        const isOpen = moodEditToggle.getAttribute("aria-expanded") === "true";
+        moodEditToggle.setAttribute("aria-expanded", String(!isOpen));
+        moodEditForm.hidden = isOpen;
+        moodEditToggle.textContent = isOpen
+          ? "Change song and message"
+          : "Close editor";
+        moodEditStatus.textContent = "";
+      });
+
+      moodEditForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        let songUrl;
+        try {
+          songUrl = new URL(moodSongUrlInput.value.trim());
+        } catch {
+          moodEditStatus.textContent = "Please enter a valid web link.";
+          return;
+        }
+        if (songUrl.protocol !== "https:" && songUrl.protocol !== "http:") {
+          moodEditStatus.textContent = "Please enter a valid web link.";
+          return;
+        }
+
+        const mood = {
+          songUrl: songUrl.href,
+          message: moodMessageInput.value.trim(),
+        };
+        try {
+          const response = await fetch(getMoodEndpoint(), {
+            method: "PATCH",
+            headers: {
+              apikey: supabasePublishableKey,
+              "Content-Type": "application/json",
+              Prefer: "return=representation",
+            },
+            body: JSON.stringify({
+              song_url: mood.songUrl,
+              message: mood.message,
+            }),
+          });
+          if (!response.ok) throw new Error("Supabase rejected the update.");
+          const updatedRows = await response.json();
+          if (!updatedRows.length) throw new Error("No mood row was updated.");
+          applyMood(mood);
+          moodEditStatus.textContent = "Saved. Other devices will update shortly.";
+        } catch {
+          moodEditStatus.textContent =
+            "Could not save to shared storage. Check Supabase policies and try again.";
+        }
+      });
 
       likeButton.addEventListener("click", () => {
         const liked = likeButton.getAttribute("aria-pressed") !== "true";
