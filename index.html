@@ -2450,7 +2450,7 @@
       const unlockButton = document.getElementById("unlock-button");
       const passwordError = document.getElementById("password-error");
       const passwordProfiles = {
-        "130801": 1,
+        130801: 1,
         Cutiee: 2,
       };
       let activeMoodId = null;
@@ -2532,7 +2532,7 @@
       const defaultMood = {
         songUrl: "https://youtu.be/LV_wiOhO40Q?si=_qoRFKGbHob5LnL3",
         message:
-          "Whatever mood finds you today, I hope this song reminds you that you are loved, missed, and always close to my heart. 🐼💕",
+          "Whatever mood finds you today, I hope this song reminds you are always missed by someone. 🐼💕",
       };
       const moodSongLink = document.getElementById("mood-song-link");
       const moodMessageText = document.getElementById("mood-message-text");
@@ -2631,7 +2631,8 @@
           const updatedRows = await response.json();
           if (!updatedRows.length) throw new Error("No mood row was updated.");
           applyMood(mood);
-          moodEditStatus.textContent = "Saved. Other devices will update shortly.";
+          moodEditStatus.textContent =
+            "Saved. Other devices will update shortly.";
         } catch {
           moodEditStatus.textContent =
             "Could not save to shared storage. Check Supabase policies and try again.";
